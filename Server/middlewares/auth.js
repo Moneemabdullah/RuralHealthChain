@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 require("dotenv").config();
 
-const protect = async(req, res, next) => {
+exports.protect = async(req, res, next) => {
     let token = req.headers.authorization?.split(' ')[1];
     if(!token){
         return res.status(401).json({message: 'Not authorized, token missing'});
@@ -17,5 +17,3 @@ const protect = async(req, res, next) => {
         res.status(401).json({message: 'Token invalid'});
     }
 };
-
-module.exports = protect;
